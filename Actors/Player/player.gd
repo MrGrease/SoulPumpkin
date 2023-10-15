@@ -12,6 +12,11 @@ func _ready():
 	
 	healthManager.init()
 	healthManager.connect("signalDead",die)
+	var sun = get_tree().get_nodes_in_group("Sun")[0]
+	if(sun.currentState==0):#day
+		pass
+	else:
+		pass
 
 func _process(_delta):
 	var move_vec = Vector3()
@@ -29,6 +34,11 @@ func _process(_delta):
 	if Input.is_action_just_pressed("switch"):
 		switchDayNight()
 
+func setDayTime():
+	pass
+
+func setNightTime():
+	pass
 
 func switchDayNight():
 	get_tree().call_group("Sun", "flip")

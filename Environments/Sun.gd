@@ -1,6 +1,6 @@
 extends DirectionalLight3D
 
-enum ETime {DAY,NIGHT}
+enum ETime {DAY=0,NIGHT=1}
 
 @onready var animations :AnimationPlayer = $DayNightAnimationPlayer
 @onready var currentState = ETime.DAY
@@ -15,7 +15,9 @@ func flip():
 func goToDay():
 	animations.play("GoToDayTime")
 	currentState=ETime.DAY
+	get_tree().call_group("daynighteffected", "setDayTime")
 
 func goToNight():
 	animations.play("GoToNightTime")
 	currentState=ETime.NIGHT
+	get_tree().call_group("daynighteffected", "setNightTime")
