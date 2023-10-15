@@ -1,4 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dc230vpocucdq"]
+[gd_scene load_steps=12 format=3 uid="uid://dc230vpocucdq"]
+
+[ext_resource type="PackedScene" uid="uid://c0xflb83f1cbs" path="res://Actors/Player/player.tscn" id="1_agd8u"]
+[ext_resource type="Script" path="res://Environments/Sun.gd" id="1_duoyj"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qwhko"]
 
@@ -14,12 +17,27 @@ ssil_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
 
+[sub_resource type="Animation" id="Animation_34gjd"]
+resource_name = "GoToDayTime"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0), Vector3(-1.5708, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_3ljej"]
 resource_name = "GoToNightTime"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/path = NodePath("Sun:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -34,7 +52,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/path = NodePath("Sun:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -42,21 +60,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-1.5708, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_34gjd"]
-resource_name = "GoToDayTime"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionalLight3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1.5708, 0, 0), Vector3(-1.5708, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1tajt"]
@@ -69,25 +72,42 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5hy1"]
 albedo_color = Color(0.337255, 0.490196, 0.27451, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjdug"]
+size = Vector3(100, 1, 100)
+
 [node name="testWorld" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kfre4")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 90, 0)
+[node name="Sun" type="DirectionalLight3D" parent="." groups=["Sun"]]
+transform = Transform3D(1, 0, 0, 0, -3.61999e-06, 1, 0, -1, -3.61999e-06, 0, 90, 0)
 light_energy = 3.0
 shadow_enabled = true
+script = ExtResource("1_duoyj")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DirectionalLight3D"]
+[node name="DayNightAnimationPlayer" type="AnimationPlayer" parent="Sun"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_1tajt")
 }
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("1_agd8u")]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_v5hy1")
 
-[node name="TestCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 44.6121, 89.4632)
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Ground/StaticBody3D"]
+shape = SubResource("BoxShape3D_cjdug")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.869369, 20.587)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 51.2335, 19.3152, 0)
+current = true

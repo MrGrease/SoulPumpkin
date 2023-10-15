@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0xflb83f1cbs"]
+
+[ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_4fj6r"]
+[ext_resource type="Script" path="res://Actors/Player/MovementManager.gd" id="2_y4you"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_crufx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l4i64"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j8x27"]
+radius = 1.21814
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_4fj6r")
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+mesh = SubResource("CapsuleMesh_crufx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_l4i64")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="WeaponManager" type="Node3D" parent="Camera"]
+
+[node name="Weapons" type="Node3D" parent="Camera/WeaponManager"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponManager"]
+
+[node name="FirePoint" type="Node3D" parent="Camera"]
+
+[node name="MovementManager" type="Node3D" parent="."]
+script = ExtResource("2_y4you")
+
+[node name="HealthManager" type="Node3D" parent="."]
+
+[node name="PickupManager" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupManager"]
+shape = SubResource("CylinderShape3D_j8x27")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
