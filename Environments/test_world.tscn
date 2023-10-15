@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://dc230vpocucdq"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qwhko"]
+
+[sub_resource type="Sky" id="Sky_qa2ce"]
+sky_material = SubResource("PhysicalSkyMaterial_qwhko")
+
+[sub_resource type="Environment" id="Environment_kfre4"]
+background_mode = 2
+sky = SubResource("Sky_qa2ce")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_3ljej"]
+resource_name = "GoToNightTime"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aum86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_34gjd"]
+resource_name = "GoToDayTime"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0), Vector3(-1.5708, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1tajt"]
+_data = {
+"GoToDayTime": SubResource("Animation_34gjd"),
+"GoToNightTime": SubResource("Animation_3ljej"),
+"RESET": SubResource("Animation_aum86")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5hy1"]
+albedo_color = Color(0.337255, 0.490196, 0.27451, 1)
+
+[node name="testWorld" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kfre4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 90, 0)
+light_energy = 3.0
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DirectionalLight3D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_1tajt")
+}
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_v5hy1")
+
+[node name="TestCamera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 44.6121, 89.4632)
