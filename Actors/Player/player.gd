@@ -4,15 +4,18 @@ extends CharacterBody3D
 @onready var camera = $Camera
 @onready var graphics = $Graphics
 @onready var healthManager = $HealthManager
+@onready var inventoryManager = $InventoryManager
 var mouseSensitivity =0.25
 var alive =true
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	movementManager.setBody(self)
-	
 	healthManager.init()
 	healthManager.connect("signalDead",die)
+	inventoryManager.init([])
+	
+	
 	var sun = get_tree().get_nodes_in_group("Sun")[0]
 	if(sun.currentState==0):#day
 		pass
@@ -36,6 +39,8 @@ func _process(_delta):
 		movementManager.jump()
 	if Input.is_action_just_pressed("switch"):
 		switchDayNight()
+	
+	inventoryManager.attack(Input.is_action_just_pressed("attack"),Input.is_action_pressed("attack"))
 
 func setDayTime():
 	pass
@@ -53,9 +58,12 @@ func _input(event):
 		rotation_degrees.y -= mouseSensitivity * event.relative.x
 		camera.rotation_degrees.x -= mouseSensitivity * event.relative.y
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-90,90)
+		rotateMesh()
+	
 
 func rotateMesh():
 	graphics.rotation_degrees.y = camera.rotation_degrees.y 
+
 
 func die():
 	alive=false

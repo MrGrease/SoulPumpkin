@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0xflb83f1cbs"]
+[gd_scene load_steps=9 format=3 uid="uid://c0xflb83f1cbs"]
 
 [ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_4fj6r"]
 [ext_resource type="Script" path="res://Actors/Player/MovementManager.gd" id="2_y4you"]
 [ext_resource type="Script" path="res://Actors/Player/HealthManager.gd" id="3_aisr5"]
+[ext_resource type="Script" path="res://Actors/Player/InventoryManager.gd" id="4_mhff6"]
+[ext_resource type="PackedScene" uid="uid://b64egidwvmty7" path="res://Weapons/bow_sword.tscn" id="5_0celj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_crufx"]
 
@@ -48,3 +50,10 @@ script = ExtResource("3_aisr5")
 shape = SubResource("CylinderShape3D_j8x27")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryManager" type="Node3D" parent="." groups=["daynighteffected"]]
+script = ExtResource("4_mhff6")
+
+[node name="BowSword" parent="InventoryManager" instance=ExtResource("5_0celj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+unlocked = true
