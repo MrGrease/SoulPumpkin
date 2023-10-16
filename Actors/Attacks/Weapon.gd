@@ -1,11 +1,10 @@
 extends Node3D
 
+@export var unlocked = false
 @onready var anim_player = $AnimationPlayer
-@onready var projectile_emitter : Node3D = $ProjectileEmitter
+@onready var projectile_spawner : Node3D = $ProjectileSpawner
 
 @export var automatic = false
-
-var fire_point : Node3D
 var bodies_to_exclude : Array = []
 
 @export var damage = 5
@@ -27,12 +26,11 @@ func _ready():
 	add_child(attack_timer)
 	
 
-func init(_fire_point: Node3D,_bodies_to_exclude:Array):
-	fire_point = _fire_point
+func init(_bodies_to_exclude:Array):
 	bodies_to_exclude = _bodies_to_exclude
 	
 
-func attack(attack_input_just_pressed:bool,attack_input_held:bool):
+func attack(attack_input_just_pressed:bool,attack_input_held:bool,is_day:bool):
 	if !can_attack:
 		return
 	if automatic and !attack_input_held:
@@ -48,11 +46,14 @@ func attack(attack_input_just_pressed:bool,attack_input_held:bool):
 	if ammo >= shotcost:
 		ammo -= shotcost
 	
-	#TODO: Do day/nighttime
-	#projectile_emitter.fireProjectile()
+	print("attack")
+	if(is_day):
+		projectile_spawner.spawnDayTimeProjectile()
+	else:
+		projectile_spawner.spawnNightTimeProjectile()
 	
-	anim_player.stop()
-	anim_player.play("attack")
+	#anim_player.stop()
+	#anim_player.play("attack")
 	emit_signal("fired")
 	can_attack = false
 	attack_timer.start()
@@ -62,12 +63,12 @@ func finish_attack():
 
 func set_active():
 	show()
-	$Crosshair.show()
+	#$Crosshair.show()
 
 func set_inactive():
-	anim_player.play("idle")
+	#anim_player.play("idle")
 	hide()
-	$Crosshair.hide()
+	#$Crosshair.hide()
 
 func is_idle():
 	return !anim_player.is_playing() or anim_player.current_animation == "idle"

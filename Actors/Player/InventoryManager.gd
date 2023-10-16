@@ -1,12 +1,11 @@
 extends Node3D
 
-@onready var weapons = $Weapons.get_children(false)
+@onready var weapons = self.get_children(false)
 @onready var anim_player = $AnimationPlayer
 @onready var alert_area_hearing = $AlertAreaHearing
 @onready var alert_area_los = $AlertAreaLos
 var cur_slot = 0
 var cur_weapon = null
-var fire_point : Node3D
 var bodies_to_exclude : Array = []
 var isDay : bool = true
 
@@ -15,27 +14,32 @@ signal ammo_changed
 func _ready():
 	pass
 
-func init(_fire_point:Node3D,_bodies_to_exclude : Array):
-	fire_point = _fire_point
+func init(_bodies_to_exclude : Array):
 	bodies_to_exclude = _bodies_to_exclude
 	for weapon in weapons:
 		if weapon.has_method("init"):
-			weapon.init(fire_point,bodies_to_exclude)
+			weapon.init(bodies_to_exclude)
 	switch_to_weapon_slot(0)
 	
 	for weapon in weapons:
 		weapon.connect("fired",emit_ammo_changed_signal)
 		#weapon.connect("fired",alert_nearby_enemies)
+	
+	var sun = get_tree().get_nodes_in_group("Sun")[0] #not a great thing to do according to some docs but its ok if its just once on init
+	if(sun.currentState==0):#day
+		isDay=true
+	else:
+		isDay=false
 
 func attack(attack_input_just_pressed:bool,attack_input_held:bool):
-	if cur_weapon.has_method("attack"):
-		cur_weapon.attack(attack_input_just_pressed,attack_input_held)
+	if cur_weapon && cur_weapon.has_method("attack"):
+		cur_weapon.attack(attack_input_just_pressed,attack_input_held,isDay)
 
 func get_inventory_size():
-	return weapons.get_child_count(false)
+	return weapons.size()
 
 func is_index_unlocked(slot_ind:int):
-	return get_inventory_size() < slot_ind
+	return weapons[slot_ind].unlocked
 
 func switch_to_next_weapon():
 	cur_slot = (cur_slot + 1) % weapons.get_child_count()
@@ -100,3 +104,9 @@ func get_ammo_pickup(weapon_id,ammo):
 func emit_ammo_changed_signal():
 	emit_signal("ammo_changed",cur_weapon.ammo)
 	print(cur_weapon.ammo)
+
+func setDayTime():
+	isDay=true
+
+func setNightTime():
+	isDay=false

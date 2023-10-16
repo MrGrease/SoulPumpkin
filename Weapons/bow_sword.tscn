@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://b64egidwvmty7"]
+
+[ext_resource type="Script" path="res://Actors/Attacks/Weapon.gd" id="1_jrsai"]
+[ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="2_fb2yl"]
+[ext_resource type="PackedScene" uid="uid://c4mt7e6csebu" path="res://Actors/Attacks/bow_sword_ranged_projectile.tscn" id="3_0b68d"]
+[ext_resource type="PackedScene" uid="uid://bwa5lx2nfdgt6" path="res://Actors/Attacks/bow_sword_melee_projectile.tscn" id="4_wakdy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2dd34"]
+radius = 0.1
+height = 1.0
+
+[node name="BowSword" type="Node3D"]
+script = ExtResource("1_jrsai")
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("2_fb2yl")]
+projectileToSpawnDay = ExtResource("3_0b68d")
+projectileToSpawnNight = ExtResource("4_wakdy")
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.9067)
+mesh = SubResource("CapsuleMesh_2dd34")

@@ -14,6 +14,8 @@ func init():
 	currentHealth=maxHealth
 
 func hurt(damage):
+	print("taking damange")
+	print(damage)
 	if currentHealth <=0:
 		return
 	else:
