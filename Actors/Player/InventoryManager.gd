@@ -6,8 +6,9 @@ extends Node3D
 @onready var alert_area_los = $AlertAreaLos
 var cur_slot = 0
 var cur_weapon = null
-var fire_point :Node3D
+var fire_point : Node3D
 var bodies_to_exclude : Array = []
+var isDay : bool = true
 
 signal ammo_changed
 
