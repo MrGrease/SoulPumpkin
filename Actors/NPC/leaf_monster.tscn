@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5snabl6dog4r"]
+[gd_scene load_steps=9 format=3 uid="uid://c5snabl6dog4r"]
 
-[ext_resource type="Script" path="res://Actors/NPC/LeafMonster.gd" id="1_f5gd7"]
+[ext_resource type="Script" path="res://Actors/NPC/Monster.gd" id="1_a0owf"]
 [ext_resource type="Script" path="res://Actors/Player/MovementManager.gd" id="1_uamis"]
 [ext_resource type="Script" path="res://Actors/Player/HealthManager.gd" id="3_exlka"]
+[ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="4_nmtqk"]
+[ext_resource type="PackedScene" uid="uid://l6toq3npps6o" path="res://Actors/Attacks/leaf_monster_melee_projectile.tscn" id="5_2xdj5"]
+[ext_resource type="PackedScene" uid="uid://cnt76vqcrbkrh" path="res://Actors/Attacks/leaf_monster_ranged_projectile.tscn" id="6_7vij6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6v86n"]
 
@@ -12,7 +15,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 collision_mask = 31
-script = ExtResource("1_f5gd7")
+script = ExtResource("1_a0owf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -35,5 +38,9 @@ shape = SubResource("CapsuleShape3D_5n6wc")
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("4_nmtqk")]
+projectileToSpawnDay = ExtResource("5_2xdj5")
+projectileToSpawnNight = ExtResource("6_7vij6")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

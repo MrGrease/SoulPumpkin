@@ -4,30 +4,32 @@ extends CharacterBody3D
 @onready var healthManager = $HealthManager
 @onready var navigationAgent:NavigationAgent3D = $NavigationAgent3D
 @onready var attackTimer = $AttackTimer
-
+@onready var graphics = $Graphics
+@onready var projectileSpawner = $ProjectileSpawner
 enum STATES {IDLE,CHASE,ATTACK,DEAD}
 var currentState = STATES.IDLE
-enum ATTACKTYPE {MELEE,RANGED}
+enum ATTACKTYPE {DAYATTACK,NIGHTATTACK}
 var currentAttackType
-var canAttack = false
+var canAttack = true
 
 var player = null
 
-var attackRangeMelee = 0.1#day
-var attackRangeRanged = 2#night
+@export var attackRangeDay = 2.5#day
+@export var attackRangeNight = 20#night
 var attackRange
 
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
 	var sun = get_tree().get_nodes_in_group("Sun")[0]
 	if(sun.currentState==0):#day
-		attackRange=attackRangeMelee
-		currentAttackType=ATTACKTYPE.MELEE
+		attackRange=attackRangeDay
+		currentAttackType=ATTACKTYPE.DAYATTACK
 	else:
-		attackRange=attackRangeRanged
-		currentAttackType=ATTACKTYPE.RANGED
+		attackRange=attackRangeNight
+		currentAttackType=ATTACKTYPE.NIGHTATTACK
 	movementManager.setBody(self)
 	setStateIdle()
+	healthManager.connect("signalDead",setStateDead)
 
 
 func _on_attack_timer_timeout():
@@ -46,14 +48,27 @@ func checkIfPlayerInSight():
 func inAttackRange():
 	return global_transform.origin.distance_to(player.global_transform.origin) < attackRange
 
+func faceDirection(direction):
+	graphics.rotation.y = atan2(direction.x,direction.z)
+	projectileSpawner.rotation.y = atan2(direction.x,direction.z)
+
+func startAttack():
+	canAttack=false
+	attackTimer.start()
+	if(currentAttackType==ATTACKTYPE.DAYATTACK):
+		projectileSpawner.spawnDayTimeProjectile()
+	else:
+		projectileSpawner.spawnNightTimeProjectile()
+	
+
 #DayNight
 func setDayTime():
-	attackRange=attackRangeMelee
-	currentAttackType=ATTACKTYPE.MELEE
+	attackRange=attackRangeDay
+	currentAttackType=ATTACKTYPE.DAYATTACK
 
 func setNightTime():
-	attackRange=attackRangeRanged
-	currentAttackType=ATTACKTYPE.RANGED
+	attackRange=attackRangeNight
+	currentAttackType=ATTACKTYPE.NIGHTATTACK
 
 #Process
 func _physics_process(delta):
@@ -79,16 +94,27 @@ func ProcessStateChase(delta):
 	var ourPosition = global_transform.origin
 	var facedirection = ourPosition.direction_to(playerPosition)
 	navigationAgent.set_target_position(playerPosition)
-	var goalPosition = navigationAgent.get_target_position()
+	var goalPosition = navigationAgent.get_next_path_position()
 	var direction = goalPosition - ourPosition
 	direction.y = 0
 	movementManager.setMovementVector(direction)
-	#FaceDirection(Facedir,delta)
+	faceDirection(facedirection)
 
 func ProcessStateAttack(delta):
-	pass
+	movementManager.setMovementVector(Vector3.ZERO)
+	if canAttack:
+		if !inAttackRange() or !checkIfPlayerInSight():
+			setStateChase()
+		else:
+			startAttack()
+	var playerPosition = player.global_transform.origin
+	var ourPosition = global_transform.origin
+	var facedirection = ourPosition.direction_to(playerPosition)
+	faceDirection(facedirection)
+
+
 func ProcessStateDead(delta):
-	pass
+	movementManager.setMovementVector(Vector3.ZERO)
 
 #States setters
 func setStateIdle():

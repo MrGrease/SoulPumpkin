@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var graphics = $Graphics
 @onready var healthManager = $HealthManager
 var mouseSensitivity =0.25
+var alive =true
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -19,6 +20,8 @@ func _ready():
 		pass
 
 func _process(_delta):
+	if(!alive):
+		return
 	var move_vec = Vector3()
 	if Input.is_action_pressed("forwards"):
 		move_vec += Vector3.FORWARD
@@ -44,6 +47,8 @@ func switchDayNight():
 	get_tree().call_group("Sun", "flip")
 
 func _input(event):
+	if(!alive):
+		return
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= mouseSensitivity * event.relative.x
 		camera.rotation_degrees.x -= mouseSensitivity * event.relative.y
@@ -53,7 +58,8 @@ func rotateMesh():
 	graphics.rotation_degrees.y = camera.rotation_degrees.y 
 
 func die():
-	print("dead!")
+	alive=false
+	movementManager.setMovementVector(Vector3.ZERO)
 
 func hurt(damage):
 	healthManager.hurt(damage)

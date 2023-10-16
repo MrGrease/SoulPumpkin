@@ -13,7 +13,7 @@ func _ready():
 func init():
 	currentHealth=maxHealth
 
-func applyDamage(damage):
+func hurt(damage):
 	if currentHealth <=0:
 		return
 	else:

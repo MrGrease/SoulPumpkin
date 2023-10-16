@@ -37,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 
 [node name="MovementManager" type="Node3D" parent="."]
 script = ExtResource("2_y4you")
+speed = 100
 
 [node name="HealthManager" type="Node3D" parent="."]
 script = ExtResource("3_aisr5")
