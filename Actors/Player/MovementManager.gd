@@ -3,10 +3,10 @@ extends Node3D
 var body : CharacterBody3D = null
 var movementVector : Vector3
 var velocity : Vector3
-var gravity = 60
-var speed = 20
-var acceleration = 5
-var jumpStrength = 30
+@export var gravity = 60
+@export var speed = 20
+@export var acceleration = 5
+@export var jumpStrength = 30
 
 var aboutToJump = false
 func setBody(_body:CharacterBody3D):

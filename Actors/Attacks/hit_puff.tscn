@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbrv4hmk6t6mt"]
+
+[ext_resource type="Script" path="res://Actors/Attacks/hit_puff.gd" id="1_hbwjh"]
+
+[node name="hitPuff" type="Node3D"]
+script = ExtResource("1_hbwjh")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

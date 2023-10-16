@@ -11,8 +11,9 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j8x27"]
 radius = 1.21814
 
-[node name="Player" type="CharacterBody3D" groups=["player"]]
+[node name="Player" type="CharacterBody3D" groups=["daynighteffected", "player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 31
 script = ExtResource("1_4fj6r")
 
 [node name="Graphics" type="Node3D" parent="."]
@@ -36,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 
 [node name="MovementManager" type="Node3D" parent="."]
 script = ExtResource("2_y4you")
+speed = 100
 
 [node name="HealthManager" type="Node3D" parent="."]
 script = ExtResource("3_aisr5")

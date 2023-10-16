@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://u4s41h1l1pjr"]
+
+[ext_resource type="Script" path="res://Actors/Attacks/ProjectileSpawner.gd" id="1_2w2sl"]
+
+[node name="ProjectileSpawner" type="Node3D"]
+script = ExtResource("1_2w2sl")
