@@ -15,7 +15,7 @@ var canAttack = true
 var player = null
 
 @export var attackRangeDay = 2.5#day
-@export var attackRangeNight = 20#night
+@export var attackRangeNight = 100#night
 var attackRange
 
 func _ready():
@@ -41,7 +41,7 @@ func checkIfPlayerInSight():
 	var parameters = PhysicsRayQueryParameters3D.create(ourPosition,playerPosition,1,[self])
 	var spaceState = get_world_3d().get_direct_space_state()
 	var result = spaceState.intersect_ray(parameters)
-	if result.collider == player:
+	if result.has("collider") and result.collider == player:
 		return true
 	return false
 
@@ -50,7 +50,10 @@ func inAttackRange():
 
 func faceDirection(direction):
 	graphics.rotation.y = atan2(direction.x,direction.z)
-	projectileSpawner.rotation.y = atan2(direction.x,direction.z)
+	#projectileSpawner.rotation.y = atan2(direction.x,direction.z)
+	#projectileSpawner.rotation.x = 
+	projectileSpawner.look_at(player.global_transform.origin,Vector3.UP)
+
 
 func startAttack():
 	canAttack=false

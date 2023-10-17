@@ -39,7 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 
 [node name="MovementManager" type="Node3D" parent="."]
 script = ExtResource("2_y4you")
-speed = 100
+speed = 30
 
 [node name="HealthManager" type="Node3D" parent="."]
 script = ExtResource("3_aisr5")
@@ -52,8 +52,8 @@ shape = SubResource("CylinderShape3D_j8x27")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryManager" type="Node3D" parent="." groups=["daynighteffected"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("4_mhff6")
 
 [node name="BowSword" parent="InventoryManager" instance=ExtResource("5_0celj")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 unlocked = true

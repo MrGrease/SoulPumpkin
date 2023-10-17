@@ -16,7 +16,7 @@ func _ready():
 	hide()
 
 func _physics_process(delta):
-	var collision : KinematicCollision3D = move_and_collide(global_transform.basis.z * speed * delta)
+	var collision : KinematicCollision3D = move_and_collide(-global_transform.basis.z * speed * delta)
 	if collision != null && collision.get_collider() != null:
 		var collider = collision.get_collider()
 		if collider.has_method("hurt"):

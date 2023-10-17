@@ -1,7 +1,7 @@
 extends Node3D
 
-var maxHealth = 100
-var currentHealth = 100
+@export var maxHealth = 100
+@export var currentHealth = 100
 
 signal signalDead
 signal signalHurt

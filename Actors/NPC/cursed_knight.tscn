@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl0apsk43281g"]
+
+[ext_resource type="Script" path="res://Actors/NPC/Monster.gd" id="1_fl53v"]
+[ext_resource type="Script" path="res://Actors/Player/MovementManager.gd" id="2_6epgl"]
+[ext_resource type="Script" path="res://Actors/Player/HealthManager.gd" id="3_2kdtf"]
+[ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="4_o7a6k"]
+[ext_resource type="PackedScene" uid="uid://b02ocaywqtybk" path="res://Actors/Attacks/cursed_knight_ranged_projectile.tscn" id="5_gbls6"]
+[ext_resource type="PackedScene" uid="uid://b82qddd0wnf5r" path="res://Actors/Attacks/cursed_knight_melee_projectile.tscn" id="6_xagof"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l4w4c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5n6wc"]
+
+[node name="CursedKnight" type="CharacterBody3D" groups=["daynighteffected", "enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 47
+script = ExtResource("1_fl53v")
+attackRangeDay = 100.0
+attackRangeNight = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+mesh = SubResource("CylinderMesh_l4w4c")
+
+[node name="MovementManager" type="Node3D" parent="."]
+script = ExtResource("2_6epgl")
+speed = 10
+maxSpeed = 20
+
+[node name="HealthManager" type="Node3D" parent="."]
+script = ExtResource("3_2kdtf")
+maxHealth = 200
+currentHealth = 200
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_5n6wc")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("4_o7a6k")]
+projectileToSpawnDay = ExtResource("5_gbls6")
+projectileToSpawnNight = ExtResource("6_xagof")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
