@@ -20,6 +20,8 @@ func _physics_process(delta):
 	if collision != null && collision.get_collider() != null:
 		var collider = collision.get_collider()
 		if collider.has_method("hurt"):
+			print("hurting!")
+			print(collider)
 			collider.hurt(damage)
 		if(hitPuff != null and !puffSpawned):
 			spawnHitPuff()

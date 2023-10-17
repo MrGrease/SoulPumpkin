@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=3 uid="uid://7vs0pnvurff7"]
+
+[ext_resource type="Script" path="res://UI/MainMenu.gd" id="1_3adc7"]
+[ext_resource type="Theme" uid="uid://drwwk0oxe1ywg" path="res://UI/TitleTheme.tres" id="1_qw4tb"]
+[ext_resource type="Theme" uid="uid://cc0lqphl2dmyv" path="res://UI/ButtonTheme.tres" id="2_2ruep"]
+[ext_resource type="Script" path="res://Environments/Sun.gd" id="4_s8qv1"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_1gdku"]
+
+[sub_resource type="Sky" id="Sky_qa2ce"]
+sky_material = SubResource("PhysicalSkyMaterial_1gdku")
+
+[sub_resource type="Environment" id="Environment_snf6u"]
+background_mode = 2
+sky = SubResource("Sky_qa2ce")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_34gjd"]
+resource_name = "GoToDayTime"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0), Vector3(-1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3ljej"]
+resource_name = "GoToNightTime"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aum86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1tajt"]
+_data = {
+"GoToDayTime": SubResource("Animation_34gjd"),
+"GoToNightTime": SubResource("Animation_3ljej"),
+"RESET": SubResource("Animation_aum86")
+}
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_3adc7")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_qw4tb")
+text = "SOUL PUMPKIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="StartButton" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_2ruep")
+text = "START"
+
+[node name="QuitButton" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_2ruep")
+text = "QUIT"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_snf6u")
+
+[node name="Sun" type="DirectionalLight3D" parent="." groups=["Sun"]]
+transform = Transform3D(1, 0, 0, 0, -3.61999e-06, 1, 0, -1, -3.61999e-06, 0, 90, 0)
+light_energy = 3.0
+shadow_enabled = true
+script = ExtResource("4_s8qv1")
+
+[node name="DayNightAnimationPlayer" type="AnimationPlayer" parent="Sun"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_1tajt")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65385, 3.2064)
+current = true
+
+[connection signal="pressed" from="Control/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -4,7 +4,6 @@ extends Node3D
 @export var projectileToSpawnNight:Resource = null 
 
 func spawnDayTimeProjectile():
-	print("spawning day")
 	var instance = projectileToSpawnDay.instantiate()
 	get_tree().get_root().add_child(instance)
 	instance.global_transform = global_transform

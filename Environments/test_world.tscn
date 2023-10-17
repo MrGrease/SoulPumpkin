@@ -8,12 +8,12 @@
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qwhko"]
 
-[sub_resource type="Sky" id="Sky_qa2ce"]
+[sub_resource type="Sky" id="Sky_572m5"]
 sky_material = SubResource("PhysicalSkyMaterial_qwhko")
 
 [sub_resource type="Environment" id="Environment_kfre4"]
 background_mode = 2
-sky = SubResource("Sky_qa2ce")
+sky = SubResource("Sky_572m5")
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
@@ -22,6 +22,7 @@ glow_enabled = true
 
 [sub_resource type="Animation" id="Animation_34gjd"]
 resource_name = "GoToDayTime"
+length = 30.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

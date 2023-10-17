@@ -51,4 +51,5 @@ one_shot = true
 projectileToSpawnDay = ExtResource("5_m8tpt")
 projectileToSpawnNight = ExtResource("6_ncrba")
 
+[connection signal="signalDead" from="HealthManager" to="." method="_on_health_manager_signal_dead"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

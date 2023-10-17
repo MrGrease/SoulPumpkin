@@ -20,7 +20,7 @@ var player = null
 @export var attackTimeDay = 0.5
 @export var attackTimeNight = 0.5
 var attackRange
-
+var dead = false
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
 	var sun = get_tree().get_nodes_in_group("Sun")[0]
@@ -85,6 +85,8 @@ func setNightTime():
 
 #Process
 func _physics_process(delta):
+	if(dead):
+		return
 	match currentState:
 		STATES.IDLE:
 			processStatIdle(delta)
@@ -139,3 +141,8 @@ func setStateAttack():
 func setStateDead():
 	currentState=STATES.DEAD
 
+func hurt(damage):
+	healthManager.hurt(damage)
+
+func _on_health_manager_signal_dead():
+	dead=true
