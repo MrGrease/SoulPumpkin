@@ -19,5 +19,5 @@ projectileToSpawnNight = ExtResource("4_wakdy")
 [node name="Graphics" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.9067)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, -0.9)
 mesh = SubResource("CapsuleMesh_2dd34")

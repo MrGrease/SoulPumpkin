@@ -59,11 +59,15 @@ func _input(event):
 		camera.rotation_degrees.x -= mouseSensitivity * event.relative.y
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-90,90)
 		rotateMesh()
+		rotateInventoryManager()
 	
 
 func rotateMesh():
 	graphics.rotation_degrees.y = camera.rotation_degrees.y 
 
+func rotateInventoryManager():
+	inventoryManager.rotation_degrees=camera.rotation_degrees
+	
 
 func die():
 	alive=false

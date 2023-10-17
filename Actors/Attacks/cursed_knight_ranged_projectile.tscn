@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnt76vqcrbkrh"]
+[gd_scene load_steps=5 format=3 uid="uid://b02ocaywqtybk"]
 
-[ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_6g2ya"]
+[ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_s65fq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wekcc"]
+albedo_color = Color(0, 0.403922, 0.329412, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_ltmxq"]
+material = SubResource("StandardMaterial3D_wekcc")
+radius = 0.2
+height = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5xphp"]
 
-[node name="Projectile" instance=ExtResource("1_6g2ya")]
+[node name="Projectile" instance=ExtResource("1_s65fq")]
 collision_layer = 16
 collision_mask = 5
-speed = 50
-damage = 20
+speed = 40
+damage = 10
 lifeTime = 60
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics" index="0"]
