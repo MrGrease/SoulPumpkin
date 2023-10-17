@@ -57,6 +57,5 @@ script = ExtResource("4_mhff6")
 
 [node name="BowSword" parent="InventoryManager" instance=ExtResource("5_0celj")]
 unlocked = true
-automatic = true
 ammo = 3000
 attack_rate = 0.01
