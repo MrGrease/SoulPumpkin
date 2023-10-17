@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://bt2r4n6kfmrtc"]
+
+[ext_resource type="Script" path="res://Actors/NPC/Monster.gd" id="1_q1qek"]
+[ext_resource type="Script" path="res://Actors/Player/MovementManager.gd" id="2_fujtb"]
+[ext_resource type="Script" path="res://Actors/Player/HealthManager.gd" id="3_11nw6"]
+[ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="4_ma58s"]
+[ext_resource type="PackedScene" uid="uid://dumaiscjek025" path="res://Actors/Attacks/spider_sniper_projectile_day.tscn" id="5_m8tpt"]
+[ext_resource type="PackedScene" uid="uid://d2rm2sxwnrwk3" path="res://Actors/Attacks/spider_sniper_projectile_night.tscn" id="6_ncrba"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_rj4rl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5n6wc"]
+
+[node name="SpiderSniper" type="CharacterBody3D" groups=["daynighteffected", "enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 47
+script = ExtResource("1_q1qek")
+attackRangeDay = 10000.0
+attackRangeNight = 10000
+attackTimeDay = 0.1
+attackTimeNight = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+mesh = SubResource("PrismMesh_rj4rl")
+
+[node name="MovementManager" type="Node3D" parent="."]
+script = ExtResource("2_fujtb")
+speed = 10
+maxSpeed = 20
+
+[node name="HealthManager" type="Node3D" parent="."]
+script = ExtResource("3_11nw6")
+maxHealth = 200
+currentHealth = 200
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_5n6wc")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("4_ma58s")]
+projectileToSpawnDay = ExtResource("5_m8tpt")
+projectileToSpawnNight = ExtResource("6_ncrba")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

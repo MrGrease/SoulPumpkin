@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dumaiscjek025"]
+
+[ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_yd01k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ayppf"]
+albedo_color = Color(0.137255, 0.494118, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ltmxq"]
+material = SubResource("StandardMaterial3D_ayppf")
+radius = 0.2
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5xphp"]
+
+[node name="Projectile" instance=ExtResource("1_yd01k")]
+collision_layer = 16
+collision_mask = 5
+speed = 100
+damage = 2
+lifeTime = 120
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics" index="0"]
+mesh = SubResource("SphereMesh_ltmxq")
+
+[node name="LifeTimeTimer" parent="." index="1"]
+wait_time = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+shape = SubResource("SphereShape3D_5xphp")
+
+[node name="ShowTimer" parent="." index="3"]
+wait_time = 0.05

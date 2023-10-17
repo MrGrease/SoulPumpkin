@@ -10,12 +10,15 @@ enum STATES {IDLE,CHASE,ATTACK,DEAD}
 var currentState = STATES.IDLE
 enum ATTACKTYPE {DAYATTACK,NIGHTATTACK}
 var currentAttackType
+var currentAttackTime
 var canAttack = true
 
 var player = null
 
 @export var attackRangeDay = 2.5#day
 @export var attackRangeNight = 100#night
+@export var attackTimeDay = 0.5
+@export var attackTimeNight = 0.5
 var attackRange
 
 func _ready():
@@ -24,9 +27,12 @@ func _ready():
 	if(sun.currentState==0):#day
 		attackRange=attackRangeDay
 		currentAttackType=ATTACKTYPE.DAYATTACK
+		currentAttackTime=attackTimeDay
 	else:
 		attackRange=attackRangeNight
 		currentAttackType=ATTACKTYPE.NIGHTATTACK
+		currentAttackTime=attackTimeNight
+	attackTimer.set_wait_time(currentAttackTime)
 	movementManager.setBody(self)
 	setStateIdle()
 	healthManager.connect("signalDead",setStateDead)
@@ -68,10 +74,14 @@ func startAttack():
 func setDayTime():
 	attackRange=attackRangeDay
 	currentAttackType=ATTACKTYPE.DAYATTACK
+	currentAttackTime=attackTimeDay
+	attackTimer.set_wait_time(currentAttackTime)
 
 func setNightTime():
 	attackRange=attackRangeNight
 	currentAttackType=ATTACKTYPE.NIGHTATTACK
+	currentAttackTime=attackTimeNight
+	attackTimer.set_wait_time(currentAttackTime)
 
 #Process
 func _physics_process(delta):

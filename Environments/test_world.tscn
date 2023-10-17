@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dc230vpocucdq"]
+[gd_scene load_steps=17 format=3 uid="uid://dc230vpocucdq"]
 
 [ext_resource type="PackedScene" uid="uid://c0xflb83f1cbs" path="res://Actors/Player/player.tscn" id="1_agd8u"]
 [ext_resource type="Script" path="res://Environments/Sun.gd" id="1_duoyj"]
 [ext_resource type="PackedScene" uid="uid://c5snabl6dog4r" path="res://Actors/NPC/leaf_monster.tscn" id="3_nyha7"]
 [ext_resource type="PackedScene" uid="uid://cl0apsk43281g" path="res://Actors/NPC/cursed_knight.tscn" id="4_psrwb"]
+[ext_resource type="PackedScene" uid="uid://bt2r4n6kfmrtc" path="res://Actors/NPC/spider_sniper.tscn" id="5_6o1ec"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qwhko"]
 
@@ -154,3 +155,6 @@ spot_range = 100.0
 
 [node name="CursedKnight" parent="." instance=ExtResource("4_psrwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.571, -89.7791)
+
+[node name="SpiderSniper" parent="." instance=ExtResource("5_6o1ec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.7912, -120.153)
