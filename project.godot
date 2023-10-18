@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="Soul Pumpkin"
-run/main_scene="res://Environments/test_world.tscn"
+run/main_scene="res://Environments/world.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 CyclopsAutoload="*res://addons/cyclops_level_builder/cyclops_global_scene.tscn"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 
 [editor_plugins]
 
