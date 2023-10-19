@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brwdhyu4fpol7"]
+
+[ext_resource type="Script" path="res://Environments/arena.gd" id="1_us8al"]
+
+[node name="Arena" type="Node3D" groups=["ReactToDeath"]]
+script = ExtResource("1_us8al")

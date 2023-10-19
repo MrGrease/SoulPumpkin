@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cthq657lwlgl6"]
+
+[ext_resource type="PackedScene" uid="uid://6ghuwct1rmai" path="res://Environments/candle_fire.tscn" id="1_cvhwj"]
+
+[sub_resource type="TextMesh" id="TextMesh_cpynj"]
+text = "LANTERN"
+
+[node name="Lantern" type="Node3D"]
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+mesh = SubResource("TextMesh_cpynj")
+
+[node name="candleFire" parent="." instance=ExtResource("1_cvhwj")]

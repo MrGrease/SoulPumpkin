@@ -5,6 +5,10 @@ extends CharacterBody3D
 @onready var graphics = $Graphics
 @onready var healthManager = $HealthManager
 @onready var inventoryManager = $InventoryManager
+@onready var situationText = $Hud/SituationText
+@onready var HUD = $Hud
+@onready var Pause = $Pause
+var paused =false
 var mouseSensitivity =0.25
 var alive =true
 
@@ -23,7 +27,24 @@ func _ready():
 		pass
 
 func _process(_delta):
+	if Input.is_action_just_pressed("pause"):
+		if(paused):
+			Pause.hide()
+			HUD.show()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			get_tree().paused = false
+		else:
+			Pause.show()
+			HUD.hide()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_tree().paused = true
+		paused=!paused
+	if(paused):
+		return
 	if(!alive):
+		if Input.is_action_pressed("reload"):
+			get_tree().reload_current_scene()
+			get_tree().paused = false
 		return
 	var move_vec = Vector3()
 	if Input.is_action_pressed("forwards"):
@@ -39,6 +60,10 @@ func _process(_delta):
 		movementManager.jump()
 	if Input.is_action_just_pressed("switch"):
 		switchDayNight()
+	if Input.is_action_just_released("DOWN"):
+			inventoryManager.switch_to_next_weapon()
+	if Input.is_action_just_released("UP"):
+			inventoryManager.switch_to_last_weapon()
 	
 	inventoryManager.attack(Input.is_action_just_pressed("attack"),Input.is_action_pressed("attack"))
 
@@ -52,7 +77,7 @@ func switchDayNight():
 	get_tree().call_group("Sun", "flip")
 
 func _input(event):
-	if(!alive):
+	if(!alive or paused):
 		return
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= mouseSensitivity * event.relative.x
@@ -72,9 +97,31 @@ func rotateInventoryManager():
 func die():
 	alive=false
 	movementManager.setMovementVector(Vector3.ZERO)
+	$Camera/AnimationPlayer.play("die")
 
 func hurt(damage):
 	healthManager.hurt(damage)
 
 func heal(amount):
 	healthManager.heal(amount)
+
+func setSituationText(text):
+	situationText.text = text
+
+
+func _on_health_manager_health_changed():
+	HUD.updateHUDHealth(healthManager.currentHealth)
+
+
+func _on_inventory_manager_update_ammo_display():
+	HUD.updateHudAmmo(inventoryManager.getCurrentWeaponAmmo())
+
+func add_soul():
+	inventoryManager.add_soul()
+	$Hud/SoulsLabel.text = "SOULS:"+str(inventoryManager.currentSouls)
+
+func add_ammo():
+	inventoryManager.add_ammo()
+
+func end_game():
+	alive=false

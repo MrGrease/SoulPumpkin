@@ -7,20 +7,22 @@ extends Node3D
 @export var automatic = false
 var bodies_to_exclude : Array = []
 
-@export var damage = 5
 @export var ammo = 30
 @export var shotcost = 1
 
-@export var attack_rate = 0.2
+@export var attack_rate_day = 0.2
+@export var attack_rate_night = 0.2
+@export var unlockedSouls = 0
+var current_attack_rate=0.2
 var attack_timer : Timer
 var can_attack = true
-
+@export var WeaponName = ""
 signal fired
 signal out_of_ammo
 
 func _ready():
 	attack_timer = Timer.new()
-	attack_timer.wait_time = attack_rate
+	attack_timer.wait_time = current_attack_rate
 	attack_timer.connect("timeout",finish_attack)
 	attack_timer.one_shot = true
 	add_child(attack_timer)
@@ -46,7 +48,6 @@ func attack(attack_input_just_pressed:bool,attack_input_held:bool,is_day:bool):
 	if ammo >= shotcost:
 		ammo -= shotcost
 	
-	print("attack")
 	if(is_day):
 		projectile_spawner.spawnDayTimeProjectile()
 	else:
@@ -72,3 +73,11 @@ func set_inactive():
 
 func is_idle():
 	return !anim_player.is_playing() or anim_player.current_animation == "idle"
+
+func setDayTime():
+	current_attack_rate=attack_rate_day
+	attack_timer.wait_time = current_attack_rate
+
+func setNightTime():
+	current_attack_rate=attack_rate_night
+	attack_timer.wait_time = current_attack_rate

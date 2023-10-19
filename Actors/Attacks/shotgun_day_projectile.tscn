@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7ctvngts3wqj"]
+
+[ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_hhbko"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kp578"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dscm5"]
+
+[node name="Projectile" instance=ExtResource("1_hhbko")]
+collision_layer = 32
+collision_mask = 6
+speed = 100
+damage = 50
+lifeTime = 120
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics" index="0"]
+mesh = SubResource("CapsuleMesh_kp578")
+
+[node name="LifeTimeTimer" parent="." index="1"]
+wait_time = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+shape = SubResource("SphereShape3D_dscm5")
+
+[node name="ShowTimer" parent="." index="3"]
+wait_time = 0.01

@@ -1,10 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dc230vpocucdq"]
+[gd_scene load_steps=15 format=3 uid="uid://dc230vpocucdq"]
 
 [ext_resource type="PackedScene" uid="uid://c0xflb83f1cbs" path="res://Actors/Player/player.tscn" id="1_agd8u"]
 [ext_resource type="Script" path="res://Environments/Sun.gd" id="1_duoyj"]
-[ext_resource type="PackedScene" uid="uid://c5snabl6dog4r" path="res://Actors/NPC/leaf_monster.tscn" id="3_nyha7"]
-[ext_resource type="PackedScene" uid="uid://cl0apsk43281g" path="res://Actors/NPC/cursed_knight.tscn" id="4_psrwb"]
-[ext_resource type="PackedScene" uid="uid://bt2r4n6kfmrtc" path="res://Actors/NPC/spider_sniper.tscn" id="5_6o1ec"]
+[ext_resource type="PackedScene" uid="uid://cviiti861xjmu" path="res://Pickups/soul.tscn" id="3_p14pg"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qwhko"]
 
@@ -146,16 +144,25 @@ size = Vector3(15.0932, 12.6979, 1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Environment/CSGBox3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_ylahg")
 
-[node name="LeafMonster" parent="." instance=ExtResource("3_nyha7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.29908, 33.4048)
-
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 34.8697, 0)
 light_energy = 50.0
 spot_range = 100.0
 
-[node name="CursedKnight" parent="." instance=ExtResource("4_psrwb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.571, -89.7791)
+[node name="Soul" parent="." instance=ExtResource("3_p14pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732101, -10.4522)
 
-[node name="SpiderSniper" parent="." instance=ExtResource("5_6o1ec")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.7912, -120.153)
+[node name="Soul2" parent="." instance=ExtResource("3_p14pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732101, -14.0876)
+
+[node name="Soul3" parent="." instance=ExtResource("3_p14pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732101, -19.2156)
+
+[node name="Soul4" parent="." instance=ExtResource("3_p14pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732101, -24.2798)
+
+[node name="Soul5" parent="." instance=ExtResource("3_p14pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732101, -26.7438)
+
+[node name="Soul6" parent="." instance=ExtResource("3_p14pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732101, -29.856)

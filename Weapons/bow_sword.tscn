@@ -9,8 +9,12 @@
 radius = 0.1
 height = 1.0
 
-[node name="BowSword" type="Node3D"]
+[node name="BowSword" type="Node3D" groups=["daynighteffected"]]
 script = ExtResource("1_jrsai")
+unlocked = true
+attack_rate_day = 0.5
+attack_rate_night = 0.4
+WeaponName = "BowSword"
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("2_fb2yl")]
 projectileToSpawnDay = ExtResource("3_0b68d")

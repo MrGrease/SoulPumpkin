@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4cejksayruif"]
+
+[ext_resource type="Script" path="res://Actors/Attacks/Weapon.gd" id="1_aepo7"]
+[ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="2_tw222"]
+[ext_resource type="PackedScene" uid="uid://d055d5fqefm1x" path="res://Actors/Attacks/rifle_day_projectile.tscn" id="3_r3cb7"]
+[ext_resource type="PackedScene" uid="uid://0ql2wi7tjqkf" path="res://Actors/Attacks/rifle_night_projectile.tscn" id="4_7gs4w"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2dd34"]
+radius = 0.1
+height = 1.0
+
+[node name="InfernalRifle" type="Node3D" groups=["daynighteffected"]]
+script = ExtResource("1_aepo7")
+unlocked = true
+automatic = true
+ammo = 200
+attack_rate_day = 0.3
+attack_rate_night = 0.1
+WeaponName = "Infernal Rifle"
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("2_tw222")]
+projectileToSpawnDay = ExtResource("3_r3cb7")
+projectileToSpawnNight = ExtResource("4_7gs4w")
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.45, 0, -0.9)
+mesh = SubResource("CapsuleMesh_2dd34")

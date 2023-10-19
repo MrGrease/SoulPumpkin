@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfi234o3mxgkp"]
+
+[ext_resource type="Script" path="res://UI/SituationTextArea.gd" id="1_dvrbi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rf7o2"]
+size = Vector3(15.0598, 8, 15.1866)
+
+[node name="Node3D" type="Area3D"]
+script = ExtResource("1_dvrbi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_rf7o2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

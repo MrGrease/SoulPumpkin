@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq66y4p5y1hgp"]
+
+[ext_resource type="Script" path="res://Environments/fire.gd" id="1_5f0oc"]
+
+[node name="Fire" type="Node3D" groups=["hideOnDay"]]
+script = ExtResource("1_5f0oc")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.835294, 0.282353, 0.00392157, 1)
+light_energy = 20.0
+light_indirect_energy = 20.0
+light_volumetric_fog_energy = 20.0
+light_size = 50.0
+shadow_enabled = true
+distance_fade_enabled = true
+omni_range = 100.0

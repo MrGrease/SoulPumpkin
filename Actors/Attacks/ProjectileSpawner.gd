@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name projectileSpawner
 @export var projectileToSpawnDay:Resource = null 
 @export var projectileToSpawnNight:Resource = null 
 

@@ -21,6 +21,8 @@ var player = null
 @export var attackTimeNight = 0.5
 var attackRange
 var dead = false
+var startTimer
+var intialized = false
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
 	var sun = get_tree().get_nodes_in_group("Sun")[0]
@@ -34,9 +36,19 @@ func _ready():
 		currentAttackTime=attackTimeNight
 	attackTimer.set_wait_time(currentAttackTime)
 	movementManager.setBody(self)
-	setStateIdle()
 	healthManager.connect("signalDead",setStateDead)
+	startTimer = Timer.new()
+	startTimer.wait_time=5
+	startTimer.one_shot=true
+	startTimer.connect("timeout",timerInit)
+	add_child(startTimer)
+	startTimer.start()
 
+func timerInit():
+	intialized=true
+	setStateIdle()
+	startTimer.queue_free()
+	
 
 func _on_attack_timer_timeout():
 	canAttack=true
@@ -44,7 +56,7 @@ func _on_attack_timer_timeout():
 func checkIfPlayerInSight():
 	var ourPosition = global_transform.origin+Vector3.UP
 	var playerPosition = player.global_transform.origin
-	var parameters = PhysicsRayQueryParameters3D.create(ourPosition,playerPosition,1,[self])
+	var parameters = PhysicsRayQueryParameters3D.create(ourPosition,playerPosition,4294967295,[self])
 	var spaceState = get_world_3d().get_direct_space_state()
 	var result = spaceState.intersect_ray(parameters)
 	if result.has("collider") and result.collider == player:
@@ -56,8 +68,6 @@ func inAttackRange():
 
 func faceDirection(direction):
 	graphics.rotation.y = atan2(direction.x,direction.z)
-	#projectileSpawner.rotation.y = atan2(direction.x,direction.z)
-	#projectileSpawner.rotation.x = 
 	projectileSpawner.look_at(player.global_transform.origin,Vector3.UP)
 
 
@@ -85,7 +95,7 @@ func setNightTime():
 
 #Process
 func _physics_process(delta):
-	if(dead):
+	if(dead || !intialized):
 		return
 	match currentState:
 		STATES.IDLE:
@@ -145,4 +155,6 @@ func hurt(damage):
 	healthManager.hurt(damage)
 
 func _on_health_manager_signal_dead():
+	movementManager.setMovementVector(Vector3.ZERO)
 	dead=true
+	get_tree().call_group("ReactToDeath","reportEnemyKilled")

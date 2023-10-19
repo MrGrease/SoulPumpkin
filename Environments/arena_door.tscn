@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://ciyt6inktte6y"]
+
+[ext_resource type="Script" path="res://Environments/arena_door.gd" id="1_orq02"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qve4p"]
+size = Vector3(1, 10.2422, 10.0208)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brun6"]
+albedo_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fvkfg"]
+material = SubResource("StandardMaterial3D_brun6")
+size = Vector3(1, 10, 10)
+
+[sub_resource type="Animation" id="Animation_m06x3"]
+resource_name = "Lower"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -10, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lnn5r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8f8tg"]
+_data = {
+"Lower": SubResource("Animation_m06x3"),
+"RESET": SubResource("Animation_lnn5r")
+}
+
+[node name="ArenaDoor" type="Node3D"]
+script = ExtResource("1_orq02")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_layer = 4
+collision_mask = 63
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55555, 0)
+shape = SubResource("BoxShape3D_qve4p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55555, 0)
+mesh = SubResource("BoxMesh_fvkfg")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8f8tg")
+}

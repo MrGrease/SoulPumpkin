@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://ntwao512uw35"]
+
+[ext_resource type="Script" path="res://Actors/Attacks/Weapon.gd" id="1_v8sj8"]
+[ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="2_4f0wm"]
+[ext_resource type="Script" path="res://Actors/Attacks/ProjectileSpawnerShotgun.gd" id="3_q2bvc"]
+[ext_resource type="PackedScene" uid="uid://c7ctvngts3wqj" path="res://Actors/Attacks/shotgun_day_projectile.tscn" id="3_w2hrd"]
+[ext_resource type="PackedScene" uid="uid://2bgrx4turxl7" path="res://Actors/Attacks/shotgun_night_projectile.tscn" id="4_2kik4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2dd34"]
+radius = 0.1
+height = 1.0
+
+[node name="GodlessShotgun" type="Node3D" groups=["daynighteffected"]]
+script = ExtResource("1_v8sj8")
+unlocked = true
+automatic = true
+ammo = 20
+attack_rate_day = 0.5
+attack_rate_night = 0.5
+WeaponName = "Lost god's Shotgun"
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("2_4f0wm")]
+script = ExtResource("3_q2bvc")
+projectileToSpawnDay = ExtResource("3_w2hrd")
+projectileToSpawnNight = ExtResource("4_2kik4")
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.45, 0, -0.9)
+mesh = SubResource("CapsuleMesh_2dd34")

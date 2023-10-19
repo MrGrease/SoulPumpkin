@@ -1,19 +1,115 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0xflb83f1cbs"]
+[gd_scene load_steps=20 format=3 uid="uid://c0xflb83f1cbs"]
 
 [ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_4fj6r"]
 [ext_resource type="Script" path="res://Actors/Player/MovementManager.gd" id="2_y4you"]
 [ext_resource type="Script" path="res://Actors/Player/HealthManager.gd" id="3_aisr5"]
 [ext_resource type="Script" path="res://Actors/Player/InventoryManager.gd" id="4_mhff6"]
 [ext_resource type="PackedScene" uid="uid://b64egidwvmty7" path="res://Weapons/bow_sword.tscn" id="5_0celj"]
+[ext_resource type="Theme" uid="uid://bp04vpaom2klh" path="res://UI/HUDTheme.tres" id="6_au2dy"]
+[ext_resource type="PackedScene" uid="uid://d4cejksayruif" path="res://Weapons/infernal_rifle.tscn" id="6_qq2u5"]
+[ext_resource type="Script" path="res://Actors/Player/Hud.gd" id="6_rw728"]
+[ext_resource type="PackedScene" uid="uid://ntwao512uw35" path="res://Weapons/godless_shotgun.tscn" id="7_yk85f"]
+[ext_resource type="Texture2D" uid="uid://63ag1ep5fo8c" path="res://Flats/crosshair dot 4.png" id="10_45ado"]
+[ext_resource type="Script" path="res://Actors/Player/Pause.gd" id="11_dxj1q"]
+[ext_resource type="Theme" uid="uid://drwwk0oxe1ywg" path="res://UI/TitleTheme.tres" id="11_pxail"]
+[ext_resource type="Theme" uid="uid://cc0lqphl2dmyv" path="res://UI/ButtonTheme.tres" id="12_8u4cr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_crufx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l4i64"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_j8x27"]
-radius = 1.21814
+[sub_resource type="Animation" id="Animation_7363p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.55, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s0yaq"]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.55, 0), Vector3(-0.549314, -0.899574, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.8326)]
+}
+
+[sub_resource type="Animation" id="Animation_7mprl"]
+resource_name = "intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 20.4151, 53.5734), Vector3(0, 0.55, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.54285, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gfxrh"]
+_data = {
+"RESET": SubResource("Animation_7363p"),
+"die": SubResource("Animation_s0yaq"),
+"intro": SubResource("Animation_7mprl")
+}
 
 [node name="Player" type="CharacterBody3D" groups=["daynighteffected", "player"]]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_mask = 31
 script = ExtResource("1_4fj6r")
@@ -29,13 +125,12 @@ shape = SubResource("CapsuleShape3D_l4i64")
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 
-[node name="WeaponManager" type="Node3D" parent="Camera"]
-
-[node name="Weapons" type="Node3D" parent="Camera/WeaponManager"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponManager"]
-
-[node name="FirePoint" type="Node3D" parent="Camera"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
+root_node = NodePath("../..")
+autoplay = "intro"
+libraries = {
+"": SubResource("AnimationLibrary_gfxrh")
+}
 
 [node name="MovementManager" type="Node3D" parent="."]
 script = ExtResource("2_y4you")
@@ -44,18 +139,169 @@ speed = 30
 [node name="HealthManager" type="Node3D" parent="."]
 script = ExtResource("3_aisr5")
 
-[node name="PickupManager" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupManager"]
-shape = SubResource("CylinderShape3D_j8x27")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [node name="InventoryManager" type="Node3D" parent="." groups=["daynighteffected"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("4_mhff6")
 
 [node name="BowSword" parent="InventoryManager" instance=ExtResource("5_0celj")]
-unlocked = true
-ammo = 3000
-attack_rate = 0.01
+ammo = 50
+
+[node name="InfernalRifle" parent="InventoryManager" instance=ExtResource("6_qq2u5")]
+visible = false
+unlocked = false
+unlockedSouls = 10
+
+[node name="GodlessShotgun" parent="InventoryManager" instance=ExtResource("7_yk85f")]
+visible = false
+unlocked = false
+unlockedSouls = 5
+
+[node name="Hud" type="Control" parent="." groups=["HUD"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_rw728")
+
+[node name="HealthLabel" type="Label" parent="Hud"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -39.0
+offset_right = 186.0
+grow_vertical = 0
+theme = ExtResource("6_au2dy")
+text = "HEALTH:100
+"
+
+[node name="SoulsLabel" type="Label" parent="Hud"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_bottom = 39.0
+grow_horizontal = 0
+theme = ExtResource("6_au2dy")
+text = "Souls:0"
+
+[node name="AmmoLabel" type="Label" parent="Hud"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("6_au2dy")
+text = "Ammo:9000"
+
+[node name="SituationText" type="Label" parent="Hud"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("6_au2dy")
+metadata/_edit_use_anchors_ = true
+
+[node name="RestartLabel" type="Label" parent="Hud"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_au2dy")
+text = "press R to RESTART
+"
+
+[node name="TextureRect" type="TextureRect" parent="Hud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_45ado")
+
+[node name="ResetTimer" type="Timer" parent="Hud"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Pause" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("11_dxj1q")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Label" type="Label" parent="Pause/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("11_pxail")
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="StartButton" type="Button" parent="Pause/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("12_8u4cr")
+text = "RESTART"
+
+[node name="QuitButton" type="Button" parent="Pause/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("12_8u4cr")
+text = "QUIT"
+
+[connection signal="healthChanged" from="HealthManager" to="." method="_on_health_manager_health_changed"]
+[connection signal="signalDead" from="HealthManager" to="Hud" method="_on_health_manager_signal_dead"]
+[connection signal="displayUnlockText" from="InventoryManager" to="Hud" method="_on_inventory_manager_display_unlock_text"]
+[connection signal="update_ammo_display" from="InventoryManager" to="." method="_on_inventory_manager_update_ammo_display"]
+[connection signal="timeout" from="Hud/ResetTimer" to="Hud" method="_on_timer_timeout"]
+[connection signal="pressed" from="Pause/HBoxContainer/StartButton" to="Pause" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Pause/HBoxContainer/QuitButton" to="Pause" method="_on_quit_button_pressed"]

@@ -6,7 +6,7 @@ extends Node3D
 signal signalDead
 signal signalHurt
 signal signalHeal
-
+signal healthChanged
 func _ready():
 	init()
 
@@ -23,10 +23,12 @@ func hurt(damage):
 	if currentHealth <=0:
 		emit_signal("signalDead")
 	emit_signal("signalHurt")
+	emit_signal("healthChanged")
 
 func heal(healing):
 	if currentHealth <=0:
 		return
 	currentHealth += healing
 	emit_signal("signalHeal")
+	emit_signal("healthChanged")
 

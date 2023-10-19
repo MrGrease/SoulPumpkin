@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://chi6x7k65qs1d"]
+
+[ext_resource type="Script" path="res://Pickups/ammo.gd" id="1_tk4wg"]
+[ext_resource type="Texture2D" uid="uid://vyaxwobes0he" path="res://Flats/bullet.png" id="3_axoor"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l16rr"]
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 1.0
+scale_min = 0.1
+scale_max = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ew382"]
+transparency = 1
+albedo_color = Color(1, 0.458824, 0.0941176, 1)
+albedo_texture = ExtResource("3_axoor")
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_72mgm"]
+material = SubResource("StandardMaterial3D_ew382")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lp0i3"]
+size = Vector3(2.34348, 1, 2.29099)
+
+[node name="Ammo" type="Node3D"]
+script = ExtResource("1_tk4wg")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+amount = 5
+lifetime = 0.1
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_l16rr")
+draw_pass_1 = SubResource("PlaneMesh_72mgm")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_lp0i3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.458824, 0.0941176, 1)
+omni_range = 10.0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

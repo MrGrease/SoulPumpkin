@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://cviiti861xjmu"]
+
+[ext_resource type="Script" path="res://Pickups/soul.gd" id="1_idmoi"]
+[ext_resource type="Texture2D" uid="uid://8d5f2mnanw7e" path="res://Flats/Snowflake star 1.png" id="1_pm8g7"]
+[ext_resource type="Texture2D" uid="uid://q0l8e45bbel4" path="res://Flats/pumpkin goofy smile.png" id="2_00v1g"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d3s0y"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3tf7"]
+transparency = 1
+albedo_color = Color(0.121569, 0.403922, 1, 1)
+albedo_texture = ExtResource("1_pm8g7")
+metallic = 0.6
+uv2_triplanar = true
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bosds"]
+material = SubResource("StandardMaterial3D_r3tf7")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4xxd"]
+transparency = 1
+albedo_color = Color(0.0196078, 0, 0.623529, 1)
+albedo_texture = ExtResource("1_pm8g7")
+metallic = 0.6
+uv2_triplanar = true
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k4xg6"]
+material = SubResource("StandardMaterial3D_a4xxd")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l16rr"]
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 1.0
+scale_min = 0.1
+scale_max = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ew382"]
+transparency = 1
+albedo_color = Color(1, 0.458824, 0.0941176, 1)
+albedo_texture = ExtResource("2_00v1g")
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_72mgm"]
+material = SubResource("StandardMaterial3D_ew382")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lp0i3"]
+size = Vector3(2.34348, 1, 2.29099)
+
+[node name="Soul" type="Node3D"]
+script = ExtResource("1_idmoi")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08266, 0)
+amount = 16
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_d3s0y")
+draw_pass_1 = SubResource("PlaneMesh_bosds")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08266, 0)
+amount = 16
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_d3s0y")
+draw_pass_1 = SubResource("PlaneMesh_k4xg6")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+amount = 5
+lifetime = 0.1
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_l16rr")
+draw_pass_1 = SubResource("PlaneMesh_72mgm")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_lp0i3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.458824, 0.0941176, 1)
+omni_range = 10.0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

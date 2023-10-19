@@ -8,9 +8,10 @@ var cur_slot = 0
 var cur_weapon = null
 var bodies_to_exclude : Array = []
 var isDay : bool = true
-
+var currentSouls = 0
 signal ammo_changed
-
+signal update_ammo_display
+signal displayUnlockText
 func _ready():
 	pass
 
@@ -23,7 +24,6 @@ func init(_bodies_to_exclude : Array):
 	
 	for weapon in weapons:
 		weapon.connect("fired",emit_ammo_changed_signal)
-		#weapon.connect("fired",alert_nearby_enemies)
 	
 	var sun = get_tree().get_nodes_in_group("Sun")[0] #not a great thing to do according to some docs but its ok if its just once on init
 	if(sun.currentState==0):#day
@@ -42,7 +42,7 @@ func is_index_unlocked(slot_ind:int):
 	return weapons[slot_ind].unlocked
 
 func switch_to_next_weapon():
-	cur_slot = (cur_slot + 1) % weapons.get_child_count()
+	cur_slot = (cur_slot + 1) % weapons.size()
 	if !is_index_unlocked(cur_slot):
 		switch_to_next_weapon()
 	else:
@@ -67,6 +67,7 @@ func switch_to_weapon_slot(slot_ind:int):
 	else:
 		cur_weapon.show()
 	emit_ammo_changed_signal()
+	emit_signal("update_ammo_display")
 
 func disable_all_weapons():
 	for weapon in weapons:
@@ -85,16 +86,6 @@ func update_animation(velocity:Vector3,grounded:bool):
 func _on_character_mover_movement_info(velocity,grounded):
 	update_animation(velocity,grounded)
 
-func alert_nearby_enemies():
-	var nearby_enemies = alert_area_los.get_overlapping_bodies()
-	for nearby_enemy in nearby_enemies:
-		if nearby_enemy.has_method("alert"):
-			nearby_enemy.alert()
-	nearby_enemies = alert_area_hearing.get_overlapping_bodies()
-	for nearby_enemy in nearby_enemies:
-		if nearby_enemy.has_method("alert"):
-			nearby_enemy.alert(false)
-
 func get_ammo_pickup(weapon_id,ammo):
 	for weapon in weapons:
 		if ("inventory_id" in weapon and weapon.inventory_id == weapon_id):
@@ -103,10 +94,29 @@ func get_ammo_pickup(weapon_id,ammo):
 
 func emit_ammo_changed_signal():
 	emit_signal("ammo_changed",cur_weapon.ammo)
-	print(cur_weapon.ammo)
+	emit_signal("update_ammo_display")
 
 func setDayTime():
 	isDay=true
 
 func setNightTime():
 	isDay=false
+
+func getCurrentWeaponAmmo():
+	return cur_weapon.ammo
+
+func add_soul():
+	currentSouls=currentSouls+1
+	check_unlocks()
+
+func check_unlocks():
+	for weapon in weapons:
+		if(!weapon.unlocked and weapon.unlockedSouls <=currentSouls):
+			weapon.unlocked=true
+			emit_signal("displayUnlockText","You have unlocked: "+weapon.WeaponName)
+
+func add_ammo():
+	weapons[0].ammo=50
+	weapons[1].ammo=200
+	weapons[2].ammo=20
+	emit_ammo_changed_signal()
