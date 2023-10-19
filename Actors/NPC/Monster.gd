@@ -23,6 +23,9 @@ var attackRange
 var dead = false
 var startTimer
 var intialized = false
+var jumpThreshold = 5
+var currentJump=0
+var previousPosition=Vector3(0,0,0)
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
 	var sun = get_tree().get_nodes_in_group("Sun")[0]
@@ -124,6 +127,13 @@ func ProcessStateChase(delta):
 	direction.y = 0
 	movementManager.setMovementVector(direction)
 	faceDirection(facedirection)
+	if(previousPosition==position):
+		currentJump=currentJump+1
+	else:
+		currentJump=0
+		previousPosition=position
+	if(currentJump==jumpThreshold):
+		movementManager.jump()
 
 func ProcessStateAttack(delta):
 	movementManager.setMovementVector(Vector3.ZERO)

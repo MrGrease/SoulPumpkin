@@ -28,6 +28,7 @@ mesh = SubResource("BoxMesh_6v86n")
 script = ExtResource("1_uamis")
 speed = 10
 maxSpeed = 20
+jumpStrength = 1
 
 [node name="HealthManager" type="Node3D" parent="."]
 script = ExtResource("3_exlka")

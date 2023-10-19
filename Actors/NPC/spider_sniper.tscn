@@ -31,6 +31,7 @@ mesh = SubResource("PrismMesh_rj4rl")
 script = ExtResource("2_fujtb")
 speed = 10
 maxSpeed = 20
+jumpStrength = 0
 
 [node name="HealthManager" type="Node3D" parent="."]
 script = ExtResource("3_11nw6")

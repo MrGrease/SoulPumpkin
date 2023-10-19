@@ -30,6 +30,7 @@ mesh = SubResource("CylinderMesh_l4w4c")
 script = ExtResource("2_6epgl")
 speed = 10
 maxSpeed = 20
+jumpStrength = 1
 
 [node name="HealthManager" type="Node3D" parent="."]
 script = ExtResource("3_2kdtf")
