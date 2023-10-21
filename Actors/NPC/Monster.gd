@@ -114,7 +114,7 @@ func _physics_process(delta):
 func processStatIdle(delta):
 	if checkIfPlayerInSight():
 		setStateChase()
-	pass
+	graphics.playIdleAnimation()
 func ProcessStateChase(delta):
 	if inAttackRange() and checkIfPlayerInSight():
 		setStateAttack()
@@ -134,8 +134,10 @@ func ProcessStateChase(delta):
 		previousPosition=position
 	if(currentJump==jumpThreshold):
 		movementManager.jump()
+	graphics.playMoveAnimation()
 
 func ProcessStateAttack(delta):
+	graphics.playAttackAnimation()
 	movementManager.setMovementVector(Vector3.ZERO)
 	if canAttack:
 		if !inAttackRange() or !checkIfPlayerInSight():
@@ -167,4 +169,6 @@ func hurt(damage):
 func _on_health_manager_signal_dead():
 	movementManager.setMovementVector(Vector3.ZERO)
 	dead=true
+	setStateDead()
 	get_tree().call_group("ReactToDeath","reportEnemyKilled")
+	graphics.playDieAnimation()

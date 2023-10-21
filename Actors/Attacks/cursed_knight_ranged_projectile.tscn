@@ -1,14 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b02ocaywqtybk"]
+[gd_scene load_steps=4 format=3 uid="uid://b02ocaywqtybk"]
 
 [ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_s65fq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wekcc"]
-albedo_color = Color(0, 0.403922, 0.329412, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_ltmxq"]
-material = SubResource("StandardMaterial3D_wekcc")
-radius = 0.2
-height = 0.3
+[ext_resource type="ArrayMesh" uid="uid://r0mytqq3p558" path="res://ImportedMeshes/WeaponsAndProjectiles_Cylinder_001.res" id="2_ro3sa"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5xphp"]
 
@@ -19,8 +12,10 @@ speed = 40
 damage = 10
 lifeTime = 60
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics" index="0"]
-mesh = SubResource("SphereMesh_ltmxq")
+[node name="Mesh" type="MeshInstance3D" parent="Graphics" index="0"]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, -0.0650663, 0, 0)
+mesh = ExtResource("2_ro3sa")
+skeleton = NodePath("../..")
 
 [node name="LifeTimeTimer" parent="." index="1"]
 wait_time = 20.0

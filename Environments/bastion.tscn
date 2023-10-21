@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://hfo58e0wles4"]
+
+[ext_resource type="ArrayMesh" uid="uid://dfjkl27j2nifp" path="res://ImportedMeshes/Bastion.res" id="1_3tkh4"]
+
+[node name="Bastion" type="MeshInstance3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = ExtResource("1_3tkh4")

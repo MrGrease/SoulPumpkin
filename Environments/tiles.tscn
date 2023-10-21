@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=3 uid="uid://iukuem8d56d0"]
+
+[ext_resource type="PackedScene" uid="uid://cinik0ldw0jgk" path="res://Environments/tile_brick.tscn" id="1_dvckb"]
+[ext_resource type="PackedScene" uid="uid://ddu7qv7wjcxap" path="res://Environments/tile_grass.tscn" id="2_60tnm"]
+[ext_resource type="PackedScene" uid="uid://efjjpbej4adq" path="res://Environments/tile_wall.tscn" id="3_ttwvy"]
+[ext_resource type="PackedScene" uid="uid://boujaxmi7u8ve" path="res://Environments/base_building.tscn" id="4_kbyw8"]
+[ext_resource type="PackedScene" uid="uid://cp6vqlwdoroby" path="res://Environments/roof.tscn" id="5_y4gck"]
+[ext_resource type="PackedScene" uid="uid://cbt6e0h4r13gr" path="res://Environments/center_roof.tscn" id="6_ld0w2"]
+
+[node name="Tiles" type="Node3D"]
+
+[node name="TileBrick" parent="." instance=ExtResource("1_dvckb")]
+
+[node name="TileGrass" parent="." instance=ExtResource("2_60tnm")]
+
+[node name="TileWall" parent="." instance=ExtResource("3_ttwvy")]
+
+[node name="BaseBuilding" parent="." instance=ExtResource("4_kbyw8")]
+
+[node name="Roof" parent="." instance=ExtResource("5_y4gck")]
+
+[node name="CenterRoof" parent="." instance=ExtResource("6_ld0w2")]

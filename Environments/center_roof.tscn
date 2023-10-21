@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbt6e0h4r13gr"]
+
+[ext_resource type="ArrayMesh" uid="uid://dptovvlabyw8" path="res://ImportedMeshes/CenterRoof.res" id="1_ivjs1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jy2n4"]
+size = Vector3(20, 20, 20)
+
+[node name="CenterRoof" type="MeshInstance3D"]
+mesh = ExtResource("1_ivjs1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_jy2n4")

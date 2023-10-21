@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://syt5e0g6q1id"]
+
+[ext_resource type="Texture2D" uid="uid://dcn54ys4nw35j" path="res://Raw Assets/WeaponsAndProjectiles_shotgun.png" id="1_o4n2n"]
+
+[resource]
+resource_name = "Shell"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("1_o4n2n")

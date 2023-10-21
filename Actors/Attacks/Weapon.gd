@@ -1,7 +1,6 @@
 extends Node3D
 
 @export var unlocked = false
-@onready var anim_player = $AnimationPlayer
 @onready var projectile_spawner : Node3D = $ProjectileSpawner
 
 @export var automatic = false
@@ -19,6 +18,8 @@ var can_attack = true
 @export var WeaponName = ""
 signal fired
 signal out_of_ammo
+
+@export var nightTimeMelee=false
 
 func _ready():
 	attack_timer = Timer.new()
@@ -51,6 +52,8 @@ func attack(attack_input_just_pressed:bool,attack_input_held:bool,is_day:bool):
 	if(is_day):
 		projectile_spawner.spawnDayTimeProjectile()
 	else:
+		if(nightTimeMelee):
+			$AnimationPlayer.play("melee")
 		projectile_spawner.spawnNightTimeProjectile()
 	
 	#anim_player.stop()
@@ -72,7 +75,7 @@ func set_inactive():
 	#$Crosshair.hide()
 
 func is_idle():
-	return !anim_player.is_playing() or anim_player.current_animation == "idle"
+	pass
 
 func setDayTime():
 	current_attack_rate=attack_rate_day

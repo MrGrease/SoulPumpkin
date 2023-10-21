@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp6vqlwdoroby"]
+
+[ext_resource type="ArrayMesh" uid="uid://cn8u6n45ptyag" path="res://ImportedMeshes/Roof.res" id="1_mah2a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n7dlf"]
+size = Vector3(20, 20, 19.7689)
+
+[node name="Roof" type="MeshInstance3D"]
+mesh = ExtResource("1_mah2a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_n7dlf")

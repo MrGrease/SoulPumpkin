@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cmax40bytmij1"]
+
+[ext_resource type="Texture2D" uid="uid://bbfr4wv8k3j5a" path="res://Raw Assets/Props_MainChar_CharacterTextures.png" id="1_o5m4f"]
+
+[resource]
+resource_name = "Material.004"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("1_o5m4f")

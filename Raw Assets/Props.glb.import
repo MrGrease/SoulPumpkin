@@ -1,0 +1,337 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bu36gblca4coh"
+path="res://.godot/imported/Props.glb-e16d29d33113028e30636100cc6f1b6d.scn"
+
+[deps]
+
+source_file="res://Raw Assets/Props.glb"
+dest_files=["res://.godot/imported/Props.glb-e16d29d33113028e30636100cc6f1b6d.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"Bastion": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Bastion.tres"
+},
+"Building": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Building.tres"
+},
+"Door": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Door.tres"
+},
+"Glass": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Glass.tres"
+},
+"Lantern": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Lantern.tres"
+},
+"Material": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Material.tres"
+},
+"Material.004": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Material.004.tres"
+},
+"Rock1": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Rock1.tres"
+},
+"Rock1.001": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Rock1.001.tres"
+},
+"RoofBase": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/RoofBase.tres"
+},
+"RoofCenter": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/RoofCenter.tres"
+},
+"RoofEdge": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/RoofEdge.tres"
+},
+"RoofMiddle": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/RoofMiddle.tres"
+},
+"Tree": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Tree.tres"
+},
+"Tree.001": {
+"use_external/enabled": true,
+"use_external/path": "res://ImportedMaterials/Tree.001.tres"
+}
+},
+"meshes": {
+"Props_Cube": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube.res"
+},
+"Props_Cube_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_003.res"
+},
+"Props_Cube_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_004.res"
+},
+"Props_Cube_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_005.res"
+},
+"Props_Cube_006": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_006.res"
+},
+"Props_Cube_008": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_008.res"
+},
+"Props_Cube_009": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_009.res"
+},
+"Props_Cube_013": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_013.res"
+},
+"Props_Cube_015": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_015.res"
+},
+"Props_Cube_016": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cube_016.res"
+},
+"Props_Cylinder": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cylinder.res"
+},
+"Props_Cylinder_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cylinder_001.res"
+},
+"Props_Cylinder_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cylinder_002.res"
+},
+"Props_Cylinder_007": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Cylinder_007.res"
+},
+"Props_Sphere": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere.res"
+},
+"Props_Sphere_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_001.res"
+},
+"Props_Sphere_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_002.res"
+},
+"Props_Sphere_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_003.res"
+},
+"Props_Sphere_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_004.res"
+},
+"Props_Sphere_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_005.res"
+},
+"Props_Sphere_006": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_006.res"
+},
+"Props_Sphere_007": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_007.res"
+},
+"Props_Sphere_008": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_008.res"
+},
+"Props_Sphere_009": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://ImportedMeshes/Props_Sphere_009.res"
+}
+}
+}
+gltf/embedded_image_handling=1

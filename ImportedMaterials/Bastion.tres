@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bnoyd10l7vsm6"]
+
+[ext_resource type="Texture2D" uid="uid://ckw7h215gupgs" path="res://Raw Assets/MeshLibrary_brick.png" id="1_p0ifq"]
+
+[resource]
+resource_name = "Bastion"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("1_p0ifq")

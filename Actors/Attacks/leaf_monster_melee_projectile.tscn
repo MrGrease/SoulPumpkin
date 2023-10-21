@@ -1,14 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://l6toq3npps6o"]
+[gd_scene load_steps=4 format=3 uid="uid://l6toq3npps6o"]
 
 [ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_iwdwf"]
+[ext_resource type="ArrayMesh" uid="uid://c0mowpy36ry45" path="res://ImportedMeshes/Rock1.res" id="2_fqyui"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dscm5"]
 
 [node name="Projectile" instance=ExtResource("1_iwdwf")]
 collision_layer = 16
 collision_mask = 5
-speed = 1000
-damage = 20
+speed = 200
+damage = 5
+lifeTime = 60
+
+[node name="Rock1" type="MeshInstance3D" parent="Graphics" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = ExtResource("2_fqyui")
 
 [node name="LifeTimeTimer" parent="." index="1"]
 wait_time = 0.1

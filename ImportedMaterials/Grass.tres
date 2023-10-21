@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dai4yr0al3a8p"]
+
+[ext_resource type="Texture2D" uid="uid://dy62owsu0bfyx" path="res://Raw Assets/MeshLibrary_grass.png" id="1_ywvq2"]
+
+[resource]
+resource_name = "Grass"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("1_ywvq2")

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c7x2emoeosc2i"]
+
+[ext_resource type="Texture2D" uid="uid://dnfn7wawen5v7" path="res://Raw Assets/WeaponsAndProjectiles_MainChar_CharacterTextures.png" id="1_uiiy3"]
+
+[resource]
+resource_name = "AR"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("1_uiiy3")

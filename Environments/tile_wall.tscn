@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://efjjpbej4adq"]
+
+[ext_resource type="ArrayMesh" uid="uid://dljjpxkmxlji6" path="res://ImportedMeshes/MeshLibrary_Cube_002.res" id="1_y4bho"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nosg2"]
+size = Vector3(26.8999, 35.3747, 28.7679)
+
+[node name="TileWall" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mesh = ExtResource("1_y4bho")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 63
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_nosg2")

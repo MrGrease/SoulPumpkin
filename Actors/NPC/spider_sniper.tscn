@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt2r4n6kfmrtc"]
+[gd_scene load_steps=10 format=3 uid="uid://bt2r4n6kfmrtc"]
 
 [ext_resource type="Script" path="res://Actors/NPC/Monster.gd" id="1_q1qek"]
 [ext_resource type="Script" path="res://Actors/Player/MovementManager.gd" id="2_fujtb"]
+[ext_resource type="Script" path="res://Actors/Player/Graphics.gd" id="2_od56v"]
 [ext_resource type="Script" path="res://Actors/Player/HealthManager.gd" id="3_11nw6"]
 [ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="4_ma58s"]
 [ext_resource type="PackedScene" uid="uid://dumaiscjek025" path="res://Actors/Attacks/spider_sniper_projectile_day.tscn" id="5_m8tpt"]
 [ext_resource type="PackedScene" uid="uid://d2rm2sxwnrwk3" path="res://Actors/Attacks/spider_sniper_projectile_night.tscn" id="6_ncrba"]
+[ext_resource type="ArrayMesh" uid="uid://dpephw1dokyye" path="res://ImportedMeshes/Spider_Cube.res" id="8_jn5ys"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_rj4rl"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5n6wc"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jlgwh"]
+size = Vector3(1.28139, 0.333, 0.840485)
 
 [node name="SpiderSniper" type="CharacterBody3D" groups=["daynighteffected", "enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -20,12 +21,15 @@ attackRangeDay = 10000.0
 attackRangeNight = 10000
 attackTimeNight = 3.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
 [node name="Graphics" type="Node3D" parent="."]
+script = ExtResource("2_od56v")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
-mesh = SubResource("PrismMesh_rj4rl")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+
+[node name="SpiderCube" type="MeshInstance3D" parent="Graphics"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.605321, 0)
+mesh = ExtResource("8_jn5ys")
+skeleton = NodePath("../..")
 
 [node name="MovementManager" type="Node3D" parent="."]
 script = ExtResource("2_fujtb")
@@ -39,7 +43,8 @@ maxHealth = 200
 currentHealth = 200
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_5n6wc")
+transform = Transform3D(3.64333, 0, 0, 0, 3.64333, 0, 0, 0, 3.64333, 0, 0, 0)
+shape = SubResource("BoxShape3D_jlgwh")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

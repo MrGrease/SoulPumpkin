@@ -1,16 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciyt6inktte6y"]
+[gd_scene load_steps=7 format=3 uid="uid://ciyt6inktte6y"]
 
 [ext_resource type="Script" path="res://Environments/arena_door.gd" id="1_orq02"]
+[ext_resource type="ArrayMesh" uid="uid://cb7itajo86tn1" path="res://ImportedMeshes/Door.res" id="2_pknhg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qve4p"]
-size = Vector3(1, 10.2422, 10.0208)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brun6"]
-albedo_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_fvkfg"]
-material = SubResource("StandardMaterial3D_brun6")
-size = Vector3(1, 10, 10)
+size = Vector3(1, 50.7034, 40.3579)
 
 [sub_resource type="Animation" id="Animation_m06x3"]
 resource_name = "Lower"
@@ -24,7 +18,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -10, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, -100, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_lnn5r"]
@@ -56,12 +50,12 @@ collision_layer = 4
 collision_mask = 63
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55555, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.2864, 0)
 shape = SubResource("BoxShape3D_qve4p")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55555, 0)
-mesh = SubResource("BoxMesh_fvkfg")
+[node name="Door" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
+mesh = ExtResource("2_pknhg")
 skeleton = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

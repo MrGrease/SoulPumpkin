@@ -5,10 +5,7 @@
 [ext_resource type="Script" path="res://Actors/Attacks/ProjectileSpawnerShotgun.gd" id="3_q2bvc"]
 [ext_resource type="PackedScene" uid="uid://c7ctvngts3wqj" path="res://Actors/Attacks/shotgun_day_projectile.tscn" id="3_w2hrd"]
 [ext_resource type="PackedScene" uid="uid://2bgrx4turxl7" path="res://Actors/Attacks/shotgun_night_projectile.tscn" id="4_2kik4"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_2dd34"]
-radius = 0.1
-height = 1.0
+[ext_resource type="ArrayMesh" uid="uid://c5i83kycpy6u" path="res://ImportedMeshes/WeaponsAndProjectiles_Cylinder_002.res" id="6_uawx4"]
 
 [node name="GodlessShotgun" type="Node3D" groups=["daynighteffected"]]
 script = ExtResource("1_v8sj8")
@@ -26,6 +23,7 @@ projectileToSpawnNight = ExtResource("4_2kik4")
 
 [node name="Graphics" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.45, 0, -0.9)
-mesh = SubResource("CapsuleMesh_2dd34")
+[node name="Mesh" type="MeshInstance3D" parent="Graphics"]
+transform = Transform3D(-4.37093e-09, -0.000975624, 0.0999952, -4.26459e-11, 0.0999952, 0.000975624, -0.1, 0, -4.37114e-09, 0.753614, -0.574805, -2.24508)
+mesh = ExtResource("6_uawx4")
+skeleton = NodePath("../..")

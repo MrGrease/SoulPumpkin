@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cinik0ldw0jgk"]
+
+[ext_resource type="ArrayMesh" uid="uid://do1x1jrcpnfdc" path="res://ImportedMeshes/TileBrick.res" id="1_v18i6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d1qm3"]
+size = Vector3(20, 1.5, 20)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ruiwe"]
+
+[node name="TileBrick" type="MeshInstance3D"]
+mesh = ExtResource("1_v18i6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 63
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_d1qm3")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_ruiwe")
+
+[node name="TileBrick" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = ExtResource("1_v18i6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/TileBrick"]
+collision_layer = 4
+collision_mask = 63
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/TileBrick/StaticBody3D"]
+shape = SubResource("BoxShape3D_d1qm3")

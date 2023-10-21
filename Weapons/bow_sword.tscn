@@ -1,13 +1,87 @@
-[gd_scene load_steps=6 format=3 uid="uid://b64egidwvmty7"]
+[gd_scene load_steps=10 format=3 uid="uid://b64egidwvmty7"]
 
 [ext_resource type="Script" path="res://Actors/Attacks/Weapon.gd" id="1_jrsai"]
 [ext_resource type="PackedScene" uid="uid://u4s41h1l1pjr" path="res://Actors/Attacks/projectile_spawner.tscn" id="2_fb2yl"]
 [ext_resource type="PackedScene" uid="uid://c4mt7e6csebu" path="res://Actors/Attacks/bow_sword_ranged_projectile.tscn" id="3_0b68d"]
 [ext_resource type="PackedScene" uid="uid://bwa5lx2nfdgt6" path="res://Actors/Attacks/bow_sword_melee_projectile.tscn" id="4_wakdy"]
+[ext_resource type="ArrayMesh" uid="uid://du8igp7xcf82f" path="res://ImportedMeshes/WeaponsAndProjectiles_Cylinder.res" id="5_p5s5m"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_2dd34"]
-radius = 0.1
-height = 1.0
+[sub_resource type="Animation" id="Animation_hlqjg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.33904, 2.24653, -1.57922)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Mesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.45, 0, -1.55246)]
+}
+
+[sub_resource type="Animation" id="Animation_3olgn"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Mesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.45, 0, -1.55246)]
+}
+
+[sub_resource type="Animation" id="Animation_7jmye"]
+resource_name = "melee"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0.33904, 2.24653, -1.57922), Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_da7oh"]
+_data = {
+"RESET": SubResource("Animation_hlqjg"),
+"idle": SubResource("Animation_3olgn"),
+"melee": SubResource("Animation_7jmye")
+}
 
 [node name="BowSword" type="Node3D" groups=["daynighteffected"]]
 script = ExtResource("1_jrsai")
@@ -15,6 +89,7 @@ unlocked = true
 attack_rate_day = 0.5
 attack_rate_night = 0.4
 WeaponName = "BowSword"
+nightTimeMelee = true
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("2_fb2yl")]
 projectileToSpawnDay = ExtResource("3_0b68d")
@@ -22,6 +97,13 @@ projectileToSpawnNight = ExtResource("4_wakdy")
 
 [node name="Graphics" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, -0.9)
-mesh = SubResource("CapsuleMesh_2dd34")
+[node name="Mesh" type="MeshInstance3D" parent="Graphics"]
+transform = Transform3D(-0.0231339, -0.0627633, 0.0735832, -0.0858167, -0.000794411, -0.0332582, 0.0195272, -0.0778468, -0.0589865, 0.45, 0, -1.55246)
+mesh = ExtResource("5_p5s5m")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_da7oh")
+}

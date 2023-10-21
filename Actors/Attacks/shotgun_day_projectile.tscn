@@ -1,10 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7ctvngts3wqj"]
 
 [ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_hhbko"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_kp578"]
-radius = 0.05
-height = 0.1
+[ext_resource type="ArrayMesh" uid="uid://dncmxw7cftnnn" path="res://ImportedMeshes/WeaponsAndProjectiles_Cylinder_003.res" id="2_gyanb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dscm5"]
 
@@ -15,8 +12,10 @@ speed = 100
 damage = 50
 lifeTime = 120
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics" index="0"]
-mesh = SubResource("CapsuleMesh_kp578")
+[node name="Mesh" type="MeshInstance3D" parent="Graphics" index="0"]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 0)
+mesh = ExtResource("2_gyanb")
+skeleton = NodePath("../..")
 
 [node name="LifeTimeTimer" parent="." index="1"]
 wait_time = 0.1

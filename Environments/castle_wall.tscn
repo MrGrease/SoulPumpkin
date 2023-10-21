@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhdcdogxw2ei0"]
+
+[ext_resource type="ArrayMesh" uid="uid://dfu48ksnkw8tv" path="res://ImportedMeshes/CastleWall.res" id="1_3epjy"]
+
+[node name="CastleWall" type="MeshInstance3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = ExtResource("1_3epjy")

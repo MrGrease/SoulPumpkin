@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://2bgrx4turxl7"]
+[gd_scene load_steps=4 format=3 uid="uid://2bgrx4turxl7"]
 
 [ext_resource type="PackedScene" uid="uid://diao7nvslm1t1" path="res://Actors/Attacks/projectile.tscn" id="1_0j6po"]
+[ext_resource type="ArrayMesh" uid="uid://drnd78pm55x22" path="res://ImportedMeshes/WeaponsAndProjectiles_Cylinder_005.res" id="2_l4b8b"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dscm5"]
 
@@ -10,6 +11,11 @@ collision_mask = 6
 speed = 100
 damage = 50
 lifeTime = 120
+
+[node name="Mesh" type="MeshInstance3D" parent="Graphics" index="0"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0, 0, 0)
+mesh = ExtResource("2_l4b8b")
+skeleton = NodePath("../..")
 
 [node name="LifeTimeTimer" parent="." index="1"]
 wait_time = 0.1

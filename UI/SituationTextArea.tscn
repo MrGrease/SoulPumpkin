@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/SituationTextArea.gd" id="1_dvrbi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rf7o2"]
-size = Vector3(15.0598, 8, 15.1866)
+size = Vector3(50.1105, 8, 54.5773)
 
 [node name="Node3D" type="Area3D"]
 script = ExtResource("1_dvrbi")

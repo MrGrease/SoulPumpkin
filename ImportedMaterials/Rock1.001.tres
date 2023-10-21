@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b3duw6rf6r0qv"]
+
+[ext_resource type="Texture2D" uid="uid://b0q6b4gvnqjpv" path="res://Raw Assets/Props_rock.png" id="1_0a1re"]
+
+[resource]
+resource_name = "Rock1.001"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("1_0a1re")

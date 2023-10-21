@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://boujaxmi7u8ve"]
+
+[ext_resource type="ArrayMesh" uid="uid://ci43bule0eaxf" path="res://ImportedMeshes/BaseBuilding.res" id="1_ya3mq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rcl8o"]
+size = Vector3(20, 20, 20)
+
+[node name="BaseBuilding" type="MeshInstance3D"]
+mesh = ExtResource("1_ya3mq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_rcl8o")

@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var situationText = $Hud/SituationText
 @onready var HUD = $Hud
 @onready var Pause = $Pause
+@onready var graphicsManager = $Graphics
 var paused =false
 var mouseSensitivity =0.25
 var alive =true
@@ -43,8 +44,10 @@ func _process(_delta):
 		return
 	if(!alive):
 		if Input.is_action_pressed("reload"):
-			get_tree().reload_current_scene()
+			get_tree().change_scene_to_file("res://UI/main_menu.tscn")
 			get_tree().paused = false
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_node("/root/World").free()
 		return
 	var move_vec = Vector3()
 	if Input.is_action_pressed("forwards"):
@@ -55,6 +58,10 @@ func _process(_delta):
 		move_vec += Vector3.LEFT
 	if Input.is_action_pressed("right"):
 		move_vec += Vector3.RIGHT
+	if(move_vec!=Vector3.ZERO):
+		graphicsManager.playMoveAnimation()
+	else:
+		graphicsManager.playIdleAnimation()
 	movementManager.setMovementVector(move_vec)
 	if Input.is_action_just_pressed("jump"):
 		movementManager.jump()
@@ -98,6 +105,7 @@ func die():
 	alive=false
 	movementManager.setMovementVector(Vector3.ZERO)
 	$Camera/AnimationPlayer.play("die")
+	graphicsManager.playDieAnimation()
 
 func hurt(damage):
 	healthManager.hurt(damage)
@@ -125,3 +133,8 @@ func add_ammo():
 
 func end_game():
 	alive=false
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if(anim_name=="intro"):
+		$Graphics/Armature.hide()

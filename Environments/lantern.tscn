@@ -1,15 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://cthq657lwlgl6"]
 
 [ext_resource type="PackedScene" uid="uid://6ghuwct1rmai" path="res://Environments/candle_fire.tscn" id="1_cvhwj"]
-
-[sub_resource type="TextMesh" id="TextMesh_cpynj"]
-text = "LANTERN"
+[ext_resource type="ArrayMesh" uid="uid://ciyeqputsc5jt" path="res://ImportedMeshes/Lantern.res" id="2_basj0"]
 
 [node name="Lantern" type="Node3D"]
 
 [node name="Graphics" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
-mesh = SubResource("TextMesh_cpynj")
-
 [node name="candleFire" parent="." instance=ExtResource("1_cvhwj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45029, 0)
+
+[node name="Lantern" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("2_basj0")
